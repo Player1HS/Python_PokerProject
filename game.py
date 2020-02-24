@@ -1,7 +1,7 @@
 '''
-Created on Feb 6, 2019
+Created on Feb 6, 2020
 
-@author: My Name, Other name
+@author: Harshil Sharma, Yajat Ambati
 
 Description: Classes are done
 
@@ -43,6 +43,10 @@ class PokerCard(Card):
 
 # make a PokerHand Class
         
+# PokerCards class
+class PokerCards:
+  def sort(self):
+    
 # make a PokerGame function
 def PokerGame():
         
