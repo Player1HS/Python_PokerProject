@@ -22,7 +22,24 @@ WINNING_HANDS = [ "Royal Flush", \
                   "Pair (Jacks or better)" ]
 
 # make a PokerCard Class inherit from Card
-# class PokerCard(Card):
+class PokerCard(Card):
+  def getValue(self):
+        if self.rank == 'A':
+            return(14)
+        elif self.rank == 'J':
+            return(11)
+        elif self.rank == 'Q':
+            return(12)
+        elif self.rank == 'K':
+            return(13)
+        elif self.rank in '23456789' or self.rank == '10':
+            return(int(self.rank))
+        else:
+            raise ValueError('{} is of unkwown value'.format(self.rank))
+  def __eq__(self,other):
+    return self.getValue()==other.getValue()
+  def __lt__(self,other):
+    return self.getValue()<other.getValue()
 
 # make a PokerHand Class
         
