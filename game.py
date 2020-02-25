@@ -1,9 +1,9 @@
 '''
-Created on Feb 6, 2020
+Created on Feb 25, 2020
 
 @author: Harshil Sharma, Yajat Ambati
 
-Description: Classes are done
+Description: ______
 
 '''
 from card import Card
@@ -42,7 +42,9 @@ class PokerCard(Card):
     return self.getValue()<other.getValue()
 
 # make a PokerHand Class
-        
+class PokerHand(StackOfCards):
+  
+
 # PokerCards class
 class PokerCards:
   def sort(self):
