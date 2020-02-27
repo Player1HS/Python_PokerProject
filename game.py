@@ -65,7 +65,7 @@ def PokerGame():
     # add the 52-cards and shuffle
     
     # make rest of the game
-    print("Poker Game!! Let's Go!")
+    print("Poker Game!! Let's Go! 🃏")
     
 # add any other helper functions to organize your code nicely
     
