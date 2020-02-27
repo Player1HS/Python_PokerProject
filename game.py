@@ -57,12 +57,11 @@ class PokerPlayer(Player):
     
 # make a PokerGame function
 def PokerGame():
-        
-    # make the player
-    #player = PokerPlayer("Player", 1)
+    username=input("What is your name?")
+    money=int(input("How many credits do you want to start with?")
+    player = PokerPlayer(username, money)
     
-    # make a deck of card
-    # deck = PokerHand()  # make empty deck
+    deck = PokerHand()  # make empty deck
     # add the 52-cards and shuffle
     
     # make rest of the game
