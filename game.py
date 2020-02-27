@@ -46,8 +46,10 @@ class PokerHand(StackOfCards):
   
 
 # make a PokerPlayer Class
-class PokerPlayer:
-  
+class PokerPlayer(Player):
+  def askHoldChoice(self):
+    holding=input("What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?")
+    return holding
     
 # make a PokerGame function
 def PokerGame():
