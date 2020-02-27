@@ -45,9 +45,9 @@ class PokerCard(Card):
 class PokerHand(StackOfCards):
   
 
-# PokerCards class
-class PokerCards:
-  def sort(self):
+# make a PokerPlayer Class
+class PokerPlayer:
+  
     
 # make a PokerGame function
 def PokerGame():
