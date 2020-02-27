@@ -43,6 +43,8 @@ class PokerCard(Card):
 
 # make a PokerHand Class
 class PokerHand(StackOfCards):
+  def sort(self):
+    self.sort()
   def handType(self):
     if 
   
