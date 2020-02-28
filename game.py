@@ -46,7 +46,10 @@ class PokerHand(StackOfCards):
   def sort(self):
     self.sort()
   def handType(self):
-    if 
+    if self[0].suit() == self[1].suit() and self[0].suit() == self[2].suit() and self[0].suit() == self[3].suit() and self[0].suit() == self[4].suit():
+      if self[0].getValue() == 10 and self[1].getValue() == 11 and self[2].getValue() == 12 and self[3].getValue() == 13 and self[4].getValue() == 14:
+        return "Royal Flush"
+      self[0].getValue = 
   
 
 # make a PokerPlayer Class
@@ -57,15 +60,16 @@ class PokerPlayer(Player):
     
 # make a PokerGame function
 def PokerGame():
-    username=input("What is your name?")
-    money=int(input("How many credits do you want to start with?")
-    player = PokerPlayer(username, money)
+        
+    # make the player
+    #player = PokerPlayer("Player", 1)
     
-    deck = PokerHand()  # make empty deck
+    # make a deck of card
+    # deck = PokerHand()  # make empty deck
     # add the 52-cards and shuffle
     
     # make rest of the game
-    print("Poker Game!! Let's Go! 🃏")
+    print("Poker Game!! Let's Go!")
     
 # add any other helper functions to organize your code nicely
     
