@@ -88,7 +88,8 @@ class PokerHand(StackOfCards):
       return "Pair (Jacks or better)"
     elif spare > 10 and spare == self[3].getValue():
       return "Pair (Jacks or better)"
-    
+    else:
+      return "Nothing"
 # make a PokerPlayer Class
 class PokerPlayer(Player):
   def askHoldChoice(self):
