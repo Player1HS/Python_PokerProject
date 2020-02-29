@@ -56,24 +56,38 @@ class PokerHand(StackOfCards):
         return "Straight Flush"
       elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and and self[4].getValue() == 14:
         return "Straight Flush"
-    elif self[1].getValue() = plcHoldr and self[2].getValue() = plcHoldr and self[3].getValue() = plcHoldr:
+    elif self[1].getValue() == plcHoldr and self[2].getValue() == plcHoldr and self[3].getValue() == plcHoldr:
       return "Four of a Kind"
-    elif self[1].getValue() = spare and self[2].getValue() = spare and self[3].getValue() = spare:
+    elif self[1].getValue() == spare and self[2].getValue() == spare and self[3].getValue() == spare:
       return "Four of a Kind"
-    elif self[1].getValue() = plcHoldr and self[2].getValue() = plcHoldr and self[3].getValue() = spare:
+    elif self[1].getValue() == plcHoldr and self[2].getValue() == plcHoldr and self[3].getValue() == spare:
       return "Full House"
-    elif self[1].getValue() = plcHoldr and self[2].getValue() = spare and self[3].getValue() = spare:
+    elif self[1].getValue() == plcHoldr and self[2].getValue() == spare and self[3].getValue() == spare:
       return "Full House"
     elif self[0].suit() == self[1].suit() and self[0].suit() == self[2].suit() and self[0].suit() == self[3].suit() and self[0].suit() == self[4].suit():
       return "Flush"
     elif self[1].getValue() == (plcHoldr + 1) and self[2].getValue() == (plcHoldr + 2) and self[3].getValue() == (plcHoldr + 3) and self[4].getValue() == (plcHoldr + 4):
-        return "Straight"
+      return "Straight"
     elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and and self[4].getValue() == 14:
         return "Straight"
-    elif self[0].getValue == centr
-      
-    
-    
+    elif self[0].getValue() == centr and self[1].getValue() == centr:
+      return "3 of a Kind"
+    elif self[1].getValue() == centr and self[3].getValue() == centr:
+      return "3 of a Kind"
+    elif self[3].getValue() == centr and self[4].getValue() == centr:
+      return "3 of a Kind"
+    elif self[1].getValue() == plcHoldr and self[3].getValue() == centr:
+      return "Two Pairs"
+    elif self[1].getValue() == centr and self[3].getValue() == spare:
+      return "Two Pairs"
+    elif plcHoldr > 10 and plcHoldr == self[1].getValue():
+      return "Pair (Jacks or better)"
+    elif centr > 10 and centr == self[1].getValue():
+      return "Pair (Jacks or better)"
+    elif centr > 10 and centr == self[3].getValue():
+      return "Pair (Jacks or better)"
+    elif spare > 10 and spare == self[3].getValue():
+      return "Pair (Jacks or better)"
     
 # make a PokerPlayer Class
 class PokerPlayer(Player):
