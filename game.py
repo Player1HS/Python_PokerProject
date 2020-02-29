@@ -37,9 +37,9 @@ class PokerCard(Card):
         else:
             raise ValueError('{} is of unkwown value'.format(self.rank))
   def __eq__(self,other):
-    return self.getValue()==other.getValue()
+    return self.getValue() == other.getValue()
   def __lt__(self,other):
-    return self.getValue()<other.getValue()
+    return self.getValue() < other.getValue()
 
 # make a PokerHand Class
 class PokerHand(StackOfCards):
@@ -93,7 +93,7 @@ class PokerHand(StackOfCards):
 # make a PokerPlayer Class
 class PokerPlayer(Player):
   def askHoldChoice(self):
-    holding=input("What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?")
+    holding = input("What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?")
     return holding
     
 # make a PokerGame function
