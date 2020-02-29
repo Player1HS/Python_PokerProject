@@ -54,7 +54,8 @@ class PokerHand(StackOfCards):
         return "Straight Flush"
       elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and and self[4].getValue() == 14:
         return "Straight Flush"
-  
+      else:
+        return "Flush"
 
 # make a PokerPlayer Class
 class PokerPlayer(Player):
