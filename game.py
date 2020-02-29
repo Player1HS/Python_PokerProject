@@ -46,17 +46,35 @@ class PokerHand(StackOfCards):
   def sort(self):
     self.sort()
   def handType(self):
+    plcHoldr = self[0].getValue()
+    spare = self[4].getValue()
+    centr = self[2].getValue()
     if self[0].suit() == self[1].suit() and self[0].suit() == self[2].suit() and self[0].suit() == self[3].suit() and self[0].suit() == self[4].suit():
       if self[0].getValue() == 10 and self[1].getValue() == 11 and self[2].getValue() == 12 and self[3].getValue() == 13 and self[4].getValue() == 14:
         return "Royal Flush"
-      self[0].getValue = plcHoldr
       elif self[1].getValue() == (plcHoldr + 1) and self[2].getValue() == (plcHoldr + 2) and self[3].getValue() == (plcHoldr + 3) and self[4].getValue() == (plcHoldr + 4):
         return "Straight Flush"
       elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and and self[4].getValue() == 14:
         return "Straight Flush"
-      else:
-        return "Flush"
-
+    elif self[1].getValue() = plcHoldr and self[2].getValue() = plcHoldr and self[3].getValue() = plcHoldr:
+      return "Four of a Kind"
+    elif self[1].getValue() = spare and self[2].getValue() = spare and self[3].getValue() = spare:
+      return "Four of a Kind"
+    elif self[1].getValue() = plcHoldr and self[2].getValue() = plcHoldr and self[3].getValue() = spare:
+      return "Full House"
+    elif self[1].getValue() = plcHoldr and self[2].getValue() = spare and self[3].getValue() = spare:
+      return "Full House"
+    elif self[0].suit() == self[1].suit() and self[0].suit() == self[2].suit() and self[0].suit() == self[3].suit() and self[0].suit() == self[4].suit():
+      return "Flush"
+    elif self[1].getValue() == (plcHoldr + 1) and self[2].getValue() == (plcHoldr + 2) and self[3].getValue() == (plcHoldr + 3) and self[4].getValue() == (plcHoldr + 4):
+        return "Straight"
+    elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and and self[4].getValue() == 14:
+        return "Straight"
+    elif self[0].getValue == centr
+      
+    
+    
+    
 # make a PokerPlayer Class
 class PokerPlayer(Player):
   def askHoldChoice(self):
