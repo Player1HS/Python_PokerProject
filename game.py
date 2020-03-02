@@ -1,10 +1,7 @@
 '''
 Created on Feb 28, 2020
-
 @author: Harshil Sharma, Yajat Ambati
-
-Description: ______
-
+Description: Finished all 3 base classes (PokerCard, PokerHand, & PokerPlayer)
 '''
 from card import Card
 from stack_of_cards import StackOfCards
@@ -54,7 +51,7 @@ class PokerHand(StackOfCards):
         return "Royal Flush"
       elif self[1].getValue() == (plcHoldr + 1) and self[2].getValue() == (plcHoldr + 2) and self[3].getValue() == (plcHoldr + 3) and self[4].getValue() == (plcHoldr + 4):
         return "Straight Flush"
-      elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and and self[4].getValue() == 14:
+      elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and self[4].getValue() == 14:
         return "Straight Flush"
     elif self[1].getValue() == plcHoldr and self[2].getValue() == plcHoldr and self[3].getValue() == plcHoldr:
       return "Four of a Kind"
@@ -68,7 +65,7 @@ class PokerHand(StackOfCards):
       return "Flush"
     elif self[1].getValue() == (plcHoldr + 1) and self[2].getValue() == (plcHoldr + 2) and self[3].getValue() == (plcHoldr + 3) and self[4].getValue() == (plcHoldr + 4):
       return "Straight"
-    elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and and self[4].getValue() == 14:
+    elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and self[4].getValue() == 14:
         return "Straight"
     elif self[0].getValue() == centr and self[1].getValue() == centr:
       return "3 of a Kind"
@@ -93,7 +90,7 @@ class PokerHand(StackOfCards):
 # make a PokerPlayer Class
 class PokerPlayer(Player):
   def askHoldChoice(self):
-    holding = input("What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?")
+    holding = input('''What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?''')
     return holding
     
 # make a PokerGame function
@@ -116,6 +113,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-    
-        
-
