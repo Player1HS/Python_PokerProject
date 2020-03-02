@@ -87,8 +87,7 @@ class PokerHand(StackOfCards):
       return "Pair (Jacks or better)"
     else:
       return "Nothing"
-
-#make a PokerPlayer Class
+# make a PokerPlayer Class
 class PokerPlayer(Player):
   def askHoldChoice(self):
     holding = input('''What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?''')
@@ -100,7 +99,17 @@ def PokerGame():
   print("Hello, %s" % (name))
   money=input("How many credits would you like to start with? ")
   player = PokerPlayer(name, money)
-    # deck = PokerHand()  # make empty deck
+  deck = PokerHand()
+  for rank in ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
+    for suit in ['♥', '♦', '♣', '♠']:
+       newCard = PokerCard(rank, suit)
+       deck.add(newCard)
+  deck.shuffle
+  
+      
+
+
+  # deck = PokerHand()  # make empty deck
     # add the 52-cards and shuffle
     
     # make rest of the game
