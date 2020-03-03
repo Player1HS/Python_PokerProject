@@ -92,7 +92,17 @@ class PokerPlayer(Player):
   def askHoldChoice(self):
     holding = input('''What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?''')
     return holding
+  
+# make a playRound function
+def playRound(player,deck):
+  player.money()=player.money()-1
+  handlist=[]
+  for i in range(5):
+    d=deck.deal()
+    handlist=handlist+d
+    player.addCard(d)
     
+     
 # make a PokerGame function
 def PokerGame():
   
@@ -112,7 +122,7 @@ def PokerGame():
        deck.add(newCard)
   deck.shuffle
   
-  player.addCard(deck.deal()) # deal card from deck into player’s hand
+   # deal card from deck into player’s hand
   result = playRound(player, deck)
   print(result)
   
