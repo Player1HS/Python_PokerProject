@@ -95,10 +95,16 @@ class PokerPlayer(Player):
     
 # make a PokerGame function
 def PokerGame():
+  
+  #introduction
   name=input("Enter your name: ")
   print("Hello, %s" % (name))
   money=input("How many credits would you like to start with? ")
+  
+  #make player
   player = PokerPlayer(name, money)
+  
+  #make deck
   deck = PokerHand()
   for rank in ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
     for suit in ['♥', '♦', '♣', '♠']:
@@ -106,14 +112,7 @@ def PokerGame():
        deck.add(newCard)
   deck.shuffle
   
-      
-
-
-  # deck = PokerHand()  # make empty deck
-    # add the 52-cards and shuffle
-    
-    # make rest of the game
-    print("Poker Game!! Let's Go!")
+  print("Poker Game!! Let's Go!")
     
 # add any other helper functions to organize your code nicely
     
