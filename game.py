@@ -102,7 +102,7 @@ def PokerGame():
   money=input("How many credits would you like to start with? ")
   
   #make player
-  player = PokerPlayer(name, money)
+  player = PokerPlayer(name, money, PokerHand())
   
   #make deck
   deck = PokerHand()
@@ -111,6 +111,10 @@ def PokerGame():
        newCard = PokerCard(rank, suit)
        deck.add(newCard)
   deck.shuffle
+  
+  player.addCard(deck.deal()) # deal card from deck into player’s hand
+  result = playRound(player, deck)
+  print(result)
   
   print("Poker Game!! Let's Go!")
     
@@ -121,3 +125,5 @@ def main():
     
 if __name__ == "__main__":
     main()
+    
+PokerGame()
