@@ -96,19 +96,25 @@ class PokerPlayer(Player):
 # make a playRound function
 def playRound(player,deck):
   player.money()=player.money()-1
-  handlist=[]
+  handlist=PokerHand()
   for handloop in range(5):
-    c=deck.deal()
-    handlist=handlist+c
+    handlist=handlist+deck.deal()
   handlist.sort()
   for card in handlist:
     print(card,end="\t")
   hold=askHoldChoice()
-  for ch in hold:
-    if ch in "12345":
-      
+  if hold=="":
+    for idx in range(5):
+      handlist.remove(idx)
+      handlist.append(deck.deal())
+  handlist.sort()
+  else:
+    for ch in hold:
+      if ch in "12345":
+        posinhand=num(ch)-1
+        print("You held:",handlist[posinhand],end=" ")
+        handlist.replace(posinhand,deck.deal())
     
-     
 # make a PokerGame function
 def PokerGame():
   
