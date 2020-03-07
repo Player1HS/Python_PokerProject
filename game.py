@@ -104,20 +104,25 @@ def playRound(player,deck):
     print(card,end="\t")
   hold=askHoldChoice()
   if hold=="":
+    print("You held nothing")
     for idx in range(5):
       handlist.remove(idx)
       handlist.append(deck.deal())
-  handlist.sort()
   else:
     for ch in hold:
       if ch in "12345":
         posinhand=num(ch)-1
         print("You held:",handlist[posinhand],end=" ")
         handlist.replace(posinhand,deck.deal())
+  handlist.sort()
+  print("Your final hand:",end=" ")
+  for cards in handlist:
+    print(cards,end=" ")
+  print(handlist.handType())
     
 # make a PokerGame function
 def PokerGame():
-  
+  print("Poker Game!! Let's Go!")
   #introduction
   name=input("Enter your name: ")
   print("Hello, %s" % (name))
@@ -134,11 +139,7 @@ def PokerGame():
        deck.add(newCard)
   deck.shuffle
   
-   # deal card from deck into player’s hand
-  result = playRound(player, deck)
-  print(result)
-  
-  print("Poker Game!! Let's Go!")
+  playRound(player, deck)
     
 # add any other helper functions to organize your code nicely
     
