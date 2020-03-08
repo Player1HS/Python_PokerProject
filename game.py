@@ -128,6 +128,7 @@ def playRound(player,deck):
 # make a PokerGame function
 def PokerGame():
   print("Poker Game!! Let's Go!")
+  newround=True
   #introduction
   name=input("Enter your name: ")
   print("Hello, %s" % (name))
