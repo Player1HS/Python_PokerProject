@@ -95,7 +95,7 @@ class PokerPlayer(Player):
   
 # make a playRound function
 def playRound(player,deck):
-  player.money()=player.money()-1
+  player.money=player.money-1
   handlist=PokerHand()
   for handloop in range(5):
     handlist=handlist+deck.deal()
