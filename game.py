@@ -97,9 +97,11 @@ class PokerPlayer(Player):
 def playRound(player,deck):
   player.addMoney(-1)
   handlist=PokerHand()
+  holdstr=" "
   for handloop in range(5):
-    handlist=handlist+[deck.deal()]
+    handlist.add(deck.deal())
   handlist.sort()
+  print("Your hand:",end=" ")
   for card in handlist:
     print(card,end="\t")
   hold=askHoldChoice()
@@ -107,17 +109,20 @@ def playRound(player,deck):
     print("You held nothing")
     for idx in range(5):
       handlist.remove(idx)
-      handlist.append(deck.deal())
+      handlist.add(deck.deal())
   else:
     for ch in hold:
       if ch in "12345":
-        posinhand=num(ch)-1
-        print("You held:",handlist[posinhand],end=" ")
-        handlist.replace(posinhand,deck.deal())
+        posinhand=int(ch)-1
+        print("You held:",handlist[posinhand],end="\t")
+        holdstr=holdstr+str(posinhand)
+    for ch in hold:
+      if ch not in holdstr:
+        handlist.replace(int(ch),deck.deal())
   handlist.sort()
   print("Your final hand:",end=" ")
   for cards in handlist:
-    print(cards,end=" ")
+    print(cards,end="\t")
   print(handlist.handType())
     
 # make a PokerGame function
@@ -128,9 +133,6 @@ def PokerGame():
   print("Hello, %s" % (name))
   money=input("How many credits would you like to start with? ")
   
-  #make player
-  player = PokerPlayer(name, money, PokerHand())
-  
   #make deck
   deck = PokerHand()
   for rank in ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
@@ -138,9 +140,17 @@ def PokerGame():
        newCard = PokerCard(rank, suit)
        deck.add(newCard)
   deck.shuffle
-  
-  playRound(player, deck)
-    
-# add any other helper functions to organize your code nicely
+
+  #make player
+  player = PokerPlayer(name, money, deck)
+
+  while newround:
+    playRound(player, deck)
+    playagain=input("Would you like to play again? (y/n)")
+    if playagain=="y":
+      newround=True
+    else:
+      newround=False
+# add any other helper functions to organize your code nicely, ADD MAIN FUNCTION
     
 PokerGame()
