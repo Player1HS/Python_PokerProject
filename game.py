@@ -95,10 +95,10 @@ class PokerPlayer(Player):
   
 # make a playRound function
 def playRound(player,deck):
-  player.money=player.money-1
+  player.addMoney(-1)
   handlist=PokerHand()
   for handloop in range(5):
-    handlist=handlist+deck.deal()
+    handlist=handlist+[deck.deal()]
   handlist.sort()
   for card in handlist:
     print(card,end="\t")
@@ -142,11 +142,5 @@ def PokerGame():
   playRound(player, deck)
     
 # add any other helper functions to organize your code nicely
-    
-def main():
-    PokerGame()
-    
-if __name__ == "__main__":
-    main()
     
 PokerGame()
