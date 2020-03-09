@@ -111,6 +111,7 @@ class PokerPlayer(Player):
 # make a playRound function
 import sys
 def playRound(player,deck):
+  drunk=False
   player.addMoney(-1)
   handlist=[]
   finalhandlist=[]
@@ -216,7 +217,6 @@ def playRound(player,deck):
     
 # make a PokerGame function
 def PokerGame():
-  drunk=False
   print("Welcome to Video Poker!")
 
   #introduction to the game
