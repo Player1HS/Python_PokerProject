@@ -40,13 +40,17 @@ class PokerCard(Card):
 
 # make a PokerHand Class
 class PokerHand(StackOfCards):
+  # works perfectly due to previous functions defined
   def sort(self):
     self.cards.sort()
   def handType(self):
+    # variables representing the values of 3 cards in hand
     plcHoldr = self.getCard(0).getValue()
     spare = self.getCard(4).getValue()
     centr = self.getCard(2).getValue()
+    #first, the if statement needs to confirm whether all cards are the same suit. The process of determinming hand type will be found in an order based on point value
     if self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
+      # if the cards are the same suit, and mathch 10, J, Q, K, A (which can be checked with this if statement), the type is a royal flush
       if self.getCard(0).getValue() == 10 and self.getCard(1).getValue() == 11 and self.getCard(2).getValue() == 12 and self.getCard(3).getValue() == 13 and self.getValue(4).getValue() == 14:
         return "Royal Flush"
       elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
