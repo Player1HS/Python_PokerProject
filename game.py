@@ -20,6 +20,7 @@ WINNING_HANDS = [ "Royal Flush", \
 
 # make a PokerCard Class inherit from Card
 class PokerCard(Card):
+  # created specific getValue instances for A, Q, K, K
   def getValue(self):
         if self.rank == 'A':
             return(14)
@@ -33,6 +34,7 @@ class PokerCard(Card):
             return(int(self.rank))
         else:
             raise ValueError('{} is of unkwown value'.format(self.rank))
+  # helps sort the cards, by ranking   
   def __eq__(self,other):
     return self.getValue() == other.getValue()
   def __lt__(self,other):
@@ -43,16 +45,20 @@ class PokerHand(StackOfCards):
   def sort(self):
     self.cards.sort()
   def handType(self):
+    # getValues of some cards to make code smoother
     plcHoldr = self.getCard(0).getValue()
     spare = self.getCard(4).getValue()
     centr = self.getCard(2).getValue()
+    # Check if the suits are the same, so suit specific hand types can be tested
     if self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
       if self.getCard(0).getValue() == 10 and self.getCard(1).getValue() == 11 and self.getCard(2).getValue() == 12 and self.getCard(3).getValue() == 13 and self.getValue(4).getValue() == 14:
         return "Royal Flush"
       elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
         return "Straight Flush"
+      #testing a special case of Straight Flush
       elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight Flush"
+    # most of the hand types after are not suit specific
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue() == plcHoldr:
       return "Four of a Kind"
     elif self.getCard(1).getValue() == spare and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
