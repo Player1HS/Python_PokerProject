@@ -1,11 +1,139 @@
-'''
-Created on Feb 28, 2020
-@author: Harshil Sharma, Yajat Ambati
-Description: Finished all 3 base classes (PokerCard, PokerHand, & PokerPlayer)
-'''
-from card import Card
-from stack_of_cards import StackOfCards
-from player import Player
+class Card:
+    
+    SUIT = ['♥', '♦', '♣', '♠']
+    RANK = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
+        
+    # Returns a numerical value for cards 1-13 dependistack_of_cards the rank of the card
+    def getValue(self):
+        if self.rank == 'A':
+            return(1)
+        elif self.rank == 'J':
+            return(11)
+        elif self.rank == 'Q':
+            return(12)
+        elif self.rank == 'K':
+            return(13)
+        elif self.rank in '23456789' or self.rank == '10':
+            return(int(self.rank))
+        else:
+            raise ValueError('{} is of unkwown value'.format(self.rank))
+    
+    
+    def getRank(self):   
+        return(self.rank)
+    
+    def getSuit(self):   
+        return(self.suit)
+    
+    def __str__(self):
+        return('{}{}'.format(self.rank, self.suit)) 
+
+class Player:
+
+    # inputs:
+    #    name - string for the player's name
+    #    amount - integer for how much money the player has
+    #    cards - a StackOfCards
+    def __init__(self, name, amount, cards):
+        '''
+        Constructor
+        '''
+        self.name = name
+        self.money = amount
+        self.hand = cards
+     
+    # prints out name and the hand of stack_of_cards    
+    def __str__(self):
+        return("{}: {}".format(self.name, self.hand))
+    
+    def introduce(self):
+        print("Hi, my name is {}".format(self.name))
+        
+    def getName(self):
+        return(self.name)
+    
+    def getMoney(self):
+        return self.money
+
+    # add (or subtract) player's money    
+    def addMoney(self, amount):
+        self.money += amount
+    
+    # when player given another card, add it it player's hand    
+    def addCard(self, card):
+        self.hand.add(card)
+        
+    def getCard(self, pos):
+        return self.hand.getCard(pos)
+    
+    def removeCard(self, pos):
+        return self.hand.remove(pos)
+
+import random
+
+
+#===========================================================================
+# Description: A list of Card; used for a player's hand or a deck of cards
+#
+# State Attributes
+#     - cards - list of card; starts out empty
+# Methods
+#     - shuffle() - randomly shuffle all the card in the list
+#     - deal() - deal the 'top' card from the hand/deck
+#     - add(card) - add Card to the list of cards
+#     - remove(pos) - remove and return Card at pos number
+#     - size() - size of hand
+#     - getCard(pos) - returns a Card at the 'pos'
+#     - __str__() - returns string of all the cards in the hand like '4♣ 10♥ A♠'
+#===========================================================================
+class StackOfCards:
+
+    def __init__(self):
+        '''
+        Constructor
+        '''
+        self.cards = []
+        
+    # returns a string of all the cards in the 'deck'
+    def __str__(self):
+        s = ''
+        for card in self.cards:
+            if len(s) == 1:
+                s = s + str(card)
+            else:
+                s = s + ' ' + str(card)
+        s = s
+        return(s)
+    
+    # Add card to the 'bottom' of the deck of cards
+    def add(self, card):
+        self.cards.append(card)
+                
+    def remove(self, pos):
+        card = self.cards.pop(pos)
+        return card
+               
+    # Deal card from the 'top' of the deck of cards
+    def deal(self):
+        return self.cards.pop(0)
+        
+    def shuffle(self):
+        random.shuffle(self.cards)
+        
+    def size(self):
+        return(len(self.cards))
+    
+    def getCard(self, pos):
+        return(self.cards[pos])
+
+
+
+
+
 
 # These are the winning hands in order of strength
 WINNING_HANDS = [ "Royal Flush", \
@@ -40,59 +168,40 @@ class PokerCard(Card):
 
 # make a PokerHand Class
 class PokerHand(StackOfCards):
-  # works perfectly due to previous functions defined
   def sort(self):
     self.cards.sort()
   def handType(self):
-    # variables representing the values of 3 cards in hand
     plcHoldr = self.getCard(0).getValue()
     spare = self.getCard(4).getValue()
     centr = self.getCard(2).getValue()
-    #first, the if statement needs to confirm whether all cards are the same suit. The process of determinming hand type will be found in an order based on point value
     if self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
-      # if the cards are the same suit, and mathch 10, J, Q, K, A (which can be checked with this if statement), the type is a royal flush
       if self.getCard(0).getValue() == 10 and self.getCard(1).getValue() == 11 and self.getCard(2).getValue() == 12 and self.getCard(3).getValue() == 13 and self.getValue(4).getValue() == 14:
         return "Royal Flush"
-      # if the cards are in a sequence, and shown to be a straight, they are assigned to be a straight flush
       elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
         return "Straight Flush"
-      # Testing for a outlier case of the straight, 2, 3, 4, 5, A
       elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight Flush"
-    # 1 case of 4 of a kind (all 4 cards in the front)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue() == plcHoldr:
       return "Four of a Kind"
-    # 2 case of 4 of a kind (all 4 cards in the back)
     elif self.getCard(1).getValue() == spare and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Four of a Kind"
-    # 1 case of full house (3 then 2)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue():
       return "Full House"
-    # 2 case of full house (2 then 3)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Full House"
-    # testing if all the suits are the same
     elif self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
       return "Flush"
-    # testing if the cards are in sequence
     elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
       return "Straight"
-    # testing the special straight case 2, 3, 4, 5, A
     elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight"
-    # 1 case three of a kind (all 3 in front)
     elif self.getCard(0).getValue() == centr and self.getCard(1).getValue() == centr:
       return "3 of a Kind"
-    # 2 case three of a kind (all 3 in middle)
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == centr:
       return "3 of a Kind"
-    # 3 case three of a kind (all 3 in back)
     elif self.getCard(3).getValue() == centr and self.getCard(4).getValue() == centr:
       return "3 of a Kind"
-    # 1 case Two Pairs (both pairs in front)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == centr:
-      return "Two Pairs"
-    elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
@@ -113,6 +222,7 @@ class PokerPlayer(Player):
     return holding
   
 # make a playRound function
+import sys
 def playRound(player,deck):
   player.addMoney(-1)
   handlist=[]
@@ -135,10 +245,10 @@ def playRound(player,deck):
       if ch in "12345":
         posinhand=int(ch)-1
         print(handlist[posinhand],end="\t")
-        holdstr=holdstr+str(posinhand)
-    for ch in hold:
-      if ch not in holdstr:
-        handlist.pop(int(ch))
+        holdstr=holdstr+str(ch)
+    for i in range(1,6):
+      if str(i) not in holdstr:
+        handlist.pop(i)
         handlist.append(deck.deal())
   handlist.sort()
   print("\nYour final hand:",end=" ")
@@ -166,11 +276,16 @@ def playRound(player,deck):
     player.addMoney(50)
   elif HAND.handType()=="Pair (Jacks or better)":
     player.addMoney(1)
-  print("Your credits:",player.money)
+  if player.money==0:
+    print("You went bankrupt!")
+    newround=False
+    sys.exit()
+  else:
+    print("Your credits:",player.money)
     
 # make a PokerGame function
 def PokerGame():
-  print("Poker Game!! Let's Go!")
+  print("Welcome to Video Poker!")
   newround=True
   #introduction
   name=input("Enter your name: ")
@@ -194,7 +309,13 @@ def PokerGame():
     if playagain=="y":
       newround=True
     else:
+      print("See you soon!")
       newround=False
-# add any other helper functions to organize your code nicely, ADD MAIN FUNCTION
+
+def main():
+    PokerGame()
+    
+if __name__ == "__main__":
+    main()
     
 PokerGame()
