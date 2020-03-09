@@ -75,6 +75,8 @@ class PokerHand(StackOfCards):
       return "3 of a Kind"
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == centr:
       return "Two Pairs"
+    elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == spare:
+      return "Two Pairs"
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
     elif plcHoldr > 10 and plcHoldr == self.getCard(1).getValue():
