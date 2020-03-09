@@ -96,10 +96,10 @@ class PokerPlayer(Player):
 # make a playRound function
 def playRound(player,deck):
   player.addMoney(-1)
-  handlist=PokerHand()
+  handlist=[]
   holdstr=" "
   for dealcards in range(5):
-    handlist=handlist.add(deck.deal())
+    handlist=handlist+[deck.deal()]
   handlist.sort()
   print("Your hand:",end=" ")
   for card in handlist:
@@ -108,8 +108,8 @@ def playRound(player,deck):
   if hold=="":
     print("You held nothing")
     for idx in range(5):
-      handlist.remove(idx)
-      handlist.add(deck.deal())
+      handlist.pop(idx)
+      handlist.append(deck.deal())
   else:
     print("You held:",end=" ")
     for ch in hold:
@@ -125,8 +125,10 @@ def playRound(player,deck):
   print("\nYour final hand:",end=" ")
   for cards in handlist:
     print(cards,end="\t")
-  handlist=PokerHand()
-  print(handlist.handType())
+  HAND=PokerHand()
+  for card in handlist:
+    HAND.add(card)
+  print(HAND.handType())
   print("Your credits:",player.money)
     
 # make a PokerGame function
