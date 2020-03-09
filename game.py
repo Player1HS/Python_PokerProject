@@ -98,57 +98,65 @@ import sys
 def playRound(player,deck):
   player.addMoney(-1)
   handlist=[]
+  finalhandlist=[]
   holdstr=" "
   for dealcards in range(5):
     handlist=handlist+[deck.deal()]
   handlist.sort()
-  print("Your hand:",end=" ")
+  print("\nYour hand:",end="\t")
   for card in handlist:
     print(card,end="\t")
+  print("\n\t\t1\t2\t3\t4\t5")
   hold=player.askHoldChoice()
   if hold=="":
-    print("You held nothing")
-    for idx in range(5):
-      handlist.pop(idx)
-      handlist.append(deck.deal())
+    print("You held nothing",end="")
+    for newhand in range(5):
+      finalhandlist.append(deck.deal())
   else:
     print("You held:",end=" ")
     for ch in hold:
       if ch in "12345":
         posinhand=int(ch)-1
         print(handlist[posinhand],end="\t")
-        holdstr=holdstr+str(ch)
-    for i in range(1,6):
-      if str(i) not in holdstr:
-        handlist.pop(i)
-        handlist.append(deck.deal())
-  handlist.sort()
-  print("\nYour final hand:",end=" ")
-  for cards in handlist:
+        finalhandlist=finalhandlist+[handlist[posinhand]]
+    while len(finalhandlist)<5:
+      finalhandlist=finalhandlist+[deck.deal()]
+  finalhandlist.sort()
+  print("\nYour final hand:",end="\t")
+  for cards in finalhandlist:
     print(cards,end="\t")
   HAND=PokerHand()
-  for card in handlist:
+  for card in finalhandlist:
     HAND.add(card)
   print(HAND.handType())
   if HAND.handType()=="Royal Flush":
     player.addMoney(250)
+    print("You earned 250 credits!")
   elif HAND.handType()=="Straight Flush":
     player.addMoney(50)
+    print("You earned 50 credits!")
   elif HAND.handType()=="Four of a Kind":
     player.addMoney(25)
+    print("You earned 25 credits!")
   elif HAND.handType()=="Full House":
     player.addMoney(9)
+    print("You earned 9 credits!")
+  elif HAND.handType()=="Flush":
+    player.addmoney(6)
+    print("You earned 6 credits!")
   elif HAND.handType()=="Straight":
     player.addMoney(4)
+    print("You earned 4 credits!")
   elif HAND.handType()=="3 of a Kind":
     player.addMoney(3)
+    print("You earned 3 credits!")
   elif HAND.handType()=="Two Pairs":
     player.addMoney(2)
-  elif HAND.handType()=="Straight Flush":
-    player.addMoney(50)
+    print("You earned 2 credits!")
   elif HAND.handType()=="Pair (Jacks or better)":
     player.addMoney(1)
-  if player.money==0:
+    print("You earned 1 credit!")
+  if player.money<=0:
     print("You went bankrupt!")
     newround=False
     sys.exit()
@@ -158,9 +166,9 @@ def playRound(player,deck):
 # make a PokerGame function
 def PokerGame():
   print("Welcome to Video Poker!")
-  newround=True
+
   #introduction
-  name=input("Enter your name: ")
+  name=input("\nEnter your name: ")
   print("Hello, %s" % (name))
   money=int(input("How many credits would you like to start with? "))
   
@@ -170,19 +178,67 @@ def PokerGame():
     for suit in ['♥', '♦', '♣', '♠']:
        newCard = PokerCard(rank, suit)
        deck.add(newCard)
-  deck.shuffle()
 
   #make player
   player = PokerPlayer(name, money, deck)
 
-  while newround:
-    playRound(player, deck)
-    playagain=input("Would you like to play again? (y/n)")
-    if playagain=="y":
-      newround=True
-    else:
-      print("See you soon!")
-      newround=False
+  #function to make the user "keep playing"
+  def keepplaying():
+    newround=True
+    while newround:
+      deck.shuffle()
+      playRound(player, deck)
+      playagain=input("What would you like to do next (shop, new round, or quit)? ")
+      if playagain.lower()=="new round":
+        newround=True
+      elif playagain.lower()=="shop":
+        shop()
+      else:
+        print("See you soon!")
+        newround=False
+        sys.exit()
+
+  #make shop
+  def shop():
+    drunk=False
+    print("\n-----------SHOP-----------")
+    print("Alcohol - 50 credits")
+    print("Cheeseburger - 25 credits")
+    print("Poker Trophy - 1000 credits")
+    answers()
+
+  #a function that analyzes players possible actions in the shop
+  def answers():
+      ans=input("\nWhat would you like to do next? (new round, info [item], buy [item], quit) ")
+      if ans.lower()=="info alcohol":
+        print("Multiplies your winnings by two for the next three rounds. Costs 50 credits.")
+        answers()
+      elif ans.lower()=="info cheeseburger":
+        print("A delicious snack. Costs 25 credits.")
+        answers()
+      elif ans.lower()=="info poker trophy":
+        print("A reward for only the best Poker players.")
+        answers()
+      elif ans.lower()=="quit":
+        print("See you soon!")
+        sys.exit()
+      elif ans.lower()=="new round":
+        keepplaying()
+      elif ans.lower()=="buy alcohol":
+        player.addMoney(-50)
+        drunk=True
+        answers()
+      elif ans.lower()=="buy cheeseburger":
+        player.addMoney(-25)
+        print("You ate a cheeseburger. Yummy!")
+        answers()
+      elif ans.lower()=="buy poker trophy":
+        player.addMoney(-1000)
+        print("You are hailed as the greatest Poker player in the land.")
+        answers()
+
+  keepplaying()
+  answers()
 
 def main():
     PokerGame()
