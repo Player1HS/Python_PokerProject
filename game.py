@@ -216,6 +216,7 @@ def playRound(player,deck):
     
 # make a PokerGame function
 def PokerGame():
+  drunk=False
   print("Welcome to Video Poker!")
 
   #introduction to the game
@@ -287,7 +288,6 @@ def PokerGame():
         print("You are hailed as the greatest Poker player in the land... and you live happily ever after")
         sys.exit() #buying a trophy will allow the player to "beat" the game
   
-  drunk=False
   keepplaying()
   answers()
 
