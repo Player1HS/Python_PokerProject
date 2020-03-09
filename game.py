@@ -251,7 +251,6 @@ def PokerGame():
 
   #a game shop
   def shop():
-    drunk=False
     print("\n-----------SHOP-----------")
     print("Alcohol - 15 credits")
     print("Cheeseburger - 20 credits")
@@ -287,7 +286,8 @@ def PokerGame():
         player.addMoney(-1000)
         print("You are hailed as the greatest Poker player in the land... and you live happily ever after")
         sys.exit() #buying a trophy will allow the player to "beat" the game
-
+  
+  drunk=False
   keepplaying()
   answers()
 
