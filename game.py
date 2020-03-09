@@ -46,7 +46,7 @@ class PokerHand(StackOfCards):
     plcHoldr = self.getCard(0).getValue()
     spare = self.getCard(4).getValue()
     centr = self.getCard(2).getValue()
-    if self.getCard(0).suit() == self.getCard(1).suit() and self.getCard(0).suit() == self.getCard(2).suit() and self.getCard(0).suit() == self.getCard(3).suit() and self.getCard(0).suit() == self.getCard(4).suit():
+    if self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
       if self.getCard(0).getValue() == 10 and self.getCard(1).getValue() == 11 and self.getCard(2).getValue() == 12 and self.getCard(3).getValue() == 13 and self.getValue(4).getValue() == 14:
         return "Royal Flush"
       elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
@@ -61,7 +61,7 @@ class PokerHand(StackOfCards):
       return "Full House"
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Full House"
-    elif self.getCard(0).suit() == self.getCard(1).suit() and self.getCard(0).suit() == self.getCard(2).suit() and self.getCard(0).suit() == self.getCard(3).suit() and self.getCard(0).suit() == self.getCard(4).suit():
+    elif self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
       return "Flush"
     elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
       return "Straight"
