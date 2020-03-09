@@ -20,7 +20,7 @@ WINNING_HANDS = [ "Royal Flush", \
 
 # make a PokerCard Class inherit from Card
 class PokerCard(Card):
-  # created specific getValue instances for A, Q, K, K
+  # created specific getValue instances for A, Q, K, J
   def getValue(self):
         if self.rank == 'A':
             return(14)
