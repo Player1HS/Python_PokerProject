@@ -58,33 +58,39 @@ class PokerHand(StackOfCards):
       #testing a special case of Straight Flush
       elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight Flush"
-    # most of the hand types after are not suit specific
+    # most of the hand types after are not suit specific (testing 2 cases of Four of a Kind)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue() == plcHoldr:
       return "Four of a Kind"
     elif self.getCard(1).getValue() == spare and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Four of a Kind"
+    #testing 2 cases of Full House
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue():
       return "Full House"
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Full House"
+    # testiong suits for flush
     elif self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
       return "Flush"
     elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
       return "Straight"
+    #testing special case of straight
     elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight"
+    #testing 3 cases of 3 of a kind
     elif self.getCard(0).getValue() == centr and self.getCard(1).getValue() == centr:
       return "3 of a Kind"
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == centr:
       return "3 of a Kind"
     elif self.getCard(3).getValue() == centr and self.getCard(4).getValue() == centr:
       return "3 of a Kind"
+    #testing 3 cases of 2 pairs
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == centr:
       return "Two Pairs"
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
+    #testign
     elif plcHoldr > 10 and plcHoldr == self.getCard(1).getValue():
       return "Pair (Jacks or better)"
     elif centr > 10 and centr == self.getCard(1).getValue():
