@@ -90,7 +90,7 @@ class PokerHand(StackOfCards):
       return "Two Pairs"
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
-    #testign
+    #testing 4 cases of Jacks or better
     elif plcHoldr > 10 and plcHoldr == self.getCard(1).getValue():
       return "Pair (Jacks or better)"
     elif centr > 10 and centr == self.getCard(1).getValue():
@@ -103,6 +103,7 @@ class PokerHand(StackOfCards):
       return "Nothing"
 # make a PokerPlayer Class
 class PokerPlayer(Player):
+  #finds out the cards player wants to hold
   def askHoldChoice(self):
     holding = input('''\nWhat cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)? ''')
     return holding
@@ -181,19 +182,19 @@ def playRound(player,deck):
 def PokerGame():
   print("Welcome to Video Poker!")
 
-  #introduction
+  #introduction to the game
   name=input("\nEnter your name: ")
   print("Hello, %s" % (name))
   money=int(input("How many credits would you like to start with? "))
   
-  #make deck
+  #creation of a deck
   deck = PokerHand()
   for rank in ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
     for suit in ['♥', '♦', '♣', '♠']:
        newCard = PokerCard(rank, suit)
        deck.add(newCard)
 
-  #make player
+  #creation of a player
   player = PokerPlayer(name, money, deck)
 
   #function to make the user "keep playing"
@@ -212,7 +213,7 @@ def PokerGame():
         newround=False
         sys.exit()
 
-  #make shop
+  #a game shop
   def shop():
     drunk=False
     print("\n-----------SHOP-----------")
