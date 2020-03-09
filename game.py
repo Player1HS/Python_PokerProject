@@ -53,6 +53,7 @@ class PokerHand(StackOfCards):
       # if the cards are the same suit, and mathch 10, J, Q, K, A (which can be checked with this if statement), the type is a royal flush
       if self.getCard(0).getValue() == 10 and self.getCard(1).getValue() == 11 and self.getCard(2).getValue() == 12 and self.getCard(3).getValue() == 13 and self.getValue(4).getValue() == 14:
         return "Royal Flush"
+      # if the cards are in a sequence, and shown to be a straight, they are assigned to be a straight flush
       elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
         return "Straight Flush"
       elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
