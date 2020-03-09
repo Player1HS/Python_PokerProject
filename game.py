@@ -43,47 +43,47 @@ class PokerHand(StackOfCards):
   def sort(self):
     self.cards.sort()
   def handType(self):
-    plcHoldr = self[0].getValue()
-    spare = self[4].getValue()
-    centr = self[2].getValue()
-    if self[0].suit() == self[1].suit() and self[0].suit() == self[2].suit() and self[0].suit() == self[3].suit() and self[0].suit() == self[4].suit():
-      if self[0].getValue() == 10 and self[1].getValue() == 11 and self[2].getValue() == 12 and self[3].getValue() == 13 and self[4].getValue() == 14:
+    plcHoldr = self.getCard(0).getValue()
+    spare = self.getCard(4).getValue()
+    centr = self.getCard(2).getValue()
+    if self.getCard(0).suit() == self.getCard(1).suit() and self.getCard(0).suit() == self.getCard(2).suit() and self.getCard(0).suit() == self.getCard(3).suit() and self.getCard(0).suit() == self.getCard(4).suit():
+      if self.getCard(0).getValue() == 10 and self.getCard(1).getValue() == 11 and self.getCard(2).getValue() == 12 and self.getCard(3).getValue() == 13 and self.getValue(4).getValue() == 14:
         return "Royal Flush"
-      elif self[1].getValue() == (plcHoldr + 1) and self[2].getValue() == (plcHoldr + 2) and self[3].getValue() == (plcHoldr + 3) and self[4].getValue() == (plcHoldr + 4):
+      elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
         return "Straight Flush"
-      elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and self[4].getValue() == 14:
+      elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight Flush"
-    elif self[1].getValue() == plcHoldr and self[2].getValue() == plcHoldr and self[3].getValue() == plcHoldr:
+    elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue() == plcHoldr:
       return "Four of a Kind"
-    elif self[1].getValue() == spare and self[2].getValue() == spare and self[3].getValue() == spare:
+    elif self.getCard(1).getValue() == spare and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Four of a Kind"
-    elif self[1].getValue() == plcHoldr and self[2].getValue() == plcHoldr and self[3].getValue() == spare:
+    elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue():
       return "Full House"
-    elif self[1].getValue() == plcHoldr and self[2].getValue() == spare and self[3].getValue() == spare:
+    elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Full House"
-    elif self[0].suit() == self[1].suit() and self[0].suit() == self[2].suit() and self[0].suit() == self[3].suit() and self[0].suit() == self[4].suit():
+    elif self.getCard(0).suit() == self.getCard(1).suit() and self.getCard(0).suit() == self.getCard(2).suit() and self.getCard(0).suit() == self.getCard(3).suit() and self.getCard(0).suit() == self.getCard(4).suit():
       return "Flush"
-    elif self[1].getValue() == (plcHoldr + 1) and self[2].getValue() == (plcHoldr + 2) and self[3].getValue() == (plcHoldr + 3) and self[4].getValue() == (plcHoldr + 4):
+    elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
       return "Straight"
-    elif self[0].getValue() == 2 and self[1].getValue() == 3 and self[2].getValue() == 4 and self[3].getValue() == 5 and self[4].getValue() == 14:
+    elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight"
-    elif self[0].getValue() == centr and self[1].getValue() == centr:
+    elif self.getCard(0).getValue() == centr and self.getCard(1).getValue() == centr:
       return "3 of a Kind"
-    elif self[1].getValue() == centr and self[3].getValue() == centr:
+    elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == centr:
       return "3 of a Kind"
-    elif self[3].getValue() == centr and self[4].getValue() == centr:
+    elif self.getCard(3).getValue() == centr and self.getCard(4).getValue() == centr:
       return "3 of a Kind"
-    elif self[1].getValue() == plcHoldr and self[3].getValue() == centr:
+    elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == centr:
       return "Two Pairs"
-    elif self[1].getValue() == centr and self[3].getValue() == spare:
+    elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
-    elif plcHoldr > 10 and plcHoldr == self[1].getValue():
+    elif plcHoldr > 10 and plcHoldr == self.getCard(1).getValue():
       return "Pair (Jacks or better)"
-    elif centr > 10 and centr == self[1].getValue():
+    elif centr > 10 and centr == self.getCard(1).getValue():
       return "Pair (Jacks or better)"
-    elif centr > 10 and centr == self[3].getValue():
+    elif centr > 10 and centr == self.getCard(3).getValue():
       return "Pair (Jacks or better)"
-    elif spare > 10 and spare == self[3].getValue():
+    elif spare > 10 and spare == self.getCard(3).getValue():
       return "Pair (Jacks or better)"
     else:
       return "Nothing"
@@ -129,6 +129,24 @@ def playRound(player,deck):
   for card in handlist:
     HAND.add(card)
   print(HAND.handType())
+  if HAND.handType()=="Royal Flush":
+    player.addMoney(250)
+  elif HAND.handType()=="Straight Flush":
+    player.addMoney(50)
+  elif HAND.handType()=="Four of a Kind":
+    player.addMoney(25)
+  elif HAND.handType()=="Full House":
+    player.addMoney(9)
+  elif HAND.handType()=="Straight":
+    player.addMoney(4)
+  elif HAND.handType()=="3 of a Kind":
+    player.addMoney(3)
+  elif HAND.handType()=="Two Pairs":
+    player.addMoney(2)
+  elif HAND.handType()=="Straight Flush":
+    player.addMoney(50)
+  elif HAND.handType()=="Pair (Jacks or better)":
+    player.addMoney(1)
   print("Your credits:",player.money)
     
 # make a PokerGame function
