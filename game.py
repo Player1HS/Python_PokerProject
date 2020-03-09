@@ -175,6 +175,8 @@ def playRound(player,deck):
     elif HAND.handType()=="Pair (Jacks or better)":
       player.addMoney(2)
       print("You earned 2 credits!")
+    elif HAND.handType()=="Nothing":
+      print('''Your hangover was literally "wasted."''')
     drunk=False
   else:
     if HAND.handType()=="Royal Flush":
