@@ -41,7 +41,7 @@ class PokerCard(Card):
 # make a PokerHand Class
 class PokerHand(StackOfCards):
   def sort(self):
-    self.sort()
+    self.cards.sort()
   def handType(self):
     plcHoldr = self[0].getValue()
     spare = self[4].getValue()
@@ -90,7 +90,7 @@ class PokerHand(StackOfCards):
 # make a PokerPlayer Class
 class PokerPlayer(Player):
   def askHoldChoice(self):
-    holding = input('''What cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)?''')
+    holding = input('''\nWhat cards do you want to hold (enter with the card's position in your hand like "5 1 2" or just nothing if you want to hold none)? ''')
     return holding
   
 # make a playRound function
@@ -98,32 +98,36 @@ def playRound(player,deck):
   player.addMoney(-1)
   handlist=PokerHand()
   holdstr=" "
-  for handloop in range(5):
-    handlist.add(deck.deal())
+  for dealcards in range(5):
+    handlist=handlist.add(deck.deal())
   handlist.sort()
   print("Your hand:",end=" ")
   for card in handlist:
     print(card,end="\t")
-  hold=askHoldChoice()
+  hold=player.askHoldChoice()
   if hold=="":
     print("You held nothing")
     for idx in range(5):
       handlist.remove(idx)
       handlist.add(deck.deal())
   else:
+    print("You held:",end=" ")
     for ch in hold:
       if ch in "12345":
         posinhand=int(ch)-1
-        print("You held:",handlist[posinhand],end="\t")
+        print(handlist[posinhand],end="\t")
         holdstr=holdstr+str(posinhand)
     for ch in hold:
       if ch not in holdstr:
-        handlist.replace(int(ch),deck.deal())
+        handlist.pop(int(ch))
+        handlist.append(deck.deal())
   handlist.sort()
-  print("Your final hand:",end=" ")
+  print("\nYour final hand:",end=" ")
   for cards in handlist:
     print(cards,end="\t")
+  handlist=PokerHand()
   print(handlist.handType())
+  print("Your credits:",player.money)
     
 # make a PokerGame function
 def PokerGame():
@@ -132,7 +136,7 @@ def PokerGame():
   #introduction
   name=input("Enter your name: ")
   print("Hello, %s" % (name))
-  money=input("How many credits would you like to start with? ")
+  money=int(input("How many credits would you like to start with? "))
   
   #make deck
   deck = PokerHand()
@@ -140,7 +144,7 @@ def PokerGame():
     for suit in ['♥', '♦', '♣', '♠']:
        newCard = PokerCard(rank, suit)
        deck.add(newCard)
-  deck.shuffle
+  deck.shuffle()
 
   #make player
   player = PokerPlayer(name, money, deck)
