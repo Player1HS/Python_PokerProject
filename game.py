@@ -211,7 +211,7 @@ def playRound(player,deck):
       print("You went bankrupt!")
       newround=False
       sys.exit()
-    else:
+  else:
       print("Your credits:",player.money)
     
 # make a PokerGame function
