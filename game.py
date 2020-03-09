@@ -56,29 +56,43 @@ class PokerHand(StackOfCards):
       # if the cards are in a sequence, and shown to be a straight, they are assigned to be a straight flush
       elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
         return "Straight Flush"
+      # Testing for a outlier case of the straight, 2, 3, 4, 5, A
       elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight Flush"
+    # 1 case of 4 of a kind (all 4 cards in the front)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue() == plcHoldr:
       return "Four of a Kind"
+    # 2 case of 4 of a kind (all 4 cards in the back)
     elif self.getCard(1).getValue() == spare and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Four of a Kind"
+    # 1 case of full house (3 then 2)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == plcHoldr and self.getCard(3).getValue():
       return "Full House"
+    # 2 case of full house (2 then 3)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(2).getValue() == spare and self.getCard(3).getValue() == spare:
       return "Full House"
+    # testing if all the suits are the same
     elif self.getCard(0).getSuit() == self.getCard(1).getSuit() and self.getCard(0).getSuit() == self.getCard(2).getSuit() and self.getCard(0).getSuit() == self.getCard(3).getSuit() and self.getCard(0).getSuit() == self.getCard(4).getSuit():
       return "Flush"
+    # testing if the cards are in sequence
     elif self.getCard(1).getValue() == (plcHoldr + 1) and self.getCard(2).getValue() == (plcHoldr + 2) and self.getCard(3).getValue() == (plcHoldr + 3) and self.getCard(4).getValue() == (plcHoldr + 4):
       return "Straight"
+    # testing the special straight case 2, 3, 4, 5, A
     elif self.getCard(0).getValue() == 2 and self.getCard(1).getValue() == 3 and self.getCard(2).getValue() == 4 and self.getCard(3).getValue() == 5 and self.getCard(4).getValue() == 14:
         return "Straight"
+    # 1 case three of a kind (all 3 in front)
     elif self.getCard(0).getValue() == centr and self.getCard(1).getValue() == centr:
       return "3 of a Kind"
+    # 2 case three of a kind (all 3 in middle)
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == centr:
       return "3 of a Kind"
+    # 3 case three of a kind (all 3 in back)
     elif self.getCard(3).getValue() == centr and self.getCard(4).getValue() == centr:
       return "3 of a Kind"
+    # 1 case Two Pairs (both pairs in front)
     elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == centr:
+      return "Two Pairs"
+    elif self.getCard(1).getValue() == plcHoldr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
     elif self.getCard(1).getValue() == centr and self.getCard(3).getValue() == spare:
       return "Two Pairs"
